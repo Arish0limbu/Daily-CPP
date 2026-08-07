@@ -3,6 +3,7 @@
 using namespace std;
 void line(int l = 100)
 {
+    cout << endl;
     for (int i = 0; i < l; i++)
     {
         cout << "=";
@@ -40,20 +41,21 @@ int main()
         cls();
         line();
         center(36);
-        cout << "|| Enter Student Details ||" << endl;
+        cout << "|| Enter Student Details ||";
         line();
         cout << "Enter Student name: ";
+        cin.ignore();
         getline(cin, name);
         cout << "Enter student age: ";
         cin >> age;
         cls();
         line();
-        center(45);
+        center(40);
         cout << "|| Save Details ||";
         line();
         cout << "Do you want to record(Y/N): ";
         cin >> c;
-        if (c == 'y' || 'Y')
+        if (c == 'y' || c == 'Y')
             stu << name << "\t" << age << endl;
         cls();
         line();
