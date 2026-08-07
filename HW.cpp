@@ -40,17 +40,27 @@ int main()
         cls();
         line();
         center(36);
-        cout << "Enter Student Details" << endl;
-
-        cout << "Enter your name: ";
+        cout << "|| Enter Student Details ||" << endl;
+        line();
+        cout << "Enter Student name: ";
         getline(cin, name);
-        cout << "Enter your age: ";
+        cout << "Enter student age: ";
         cin >> age;
+        cls();
+        line();
+        center(45);
+        cout << "|| Save Details ||";
+        line();
         cout << "Do you want to record(Y/N): ";
         cin >> c;
         if (c == 'y' || 'Y')
             stu << name << "\t" << age << endl;
-        cout << "Do you want enter another name and age: ";
+        cls();
+        line();
+        center(45);
+        cout << "|| Add Details ||";
+        line();
+        cout << "Do you want add another student(Y/N): ";
         cin >> c;
     }
     stu.close();
