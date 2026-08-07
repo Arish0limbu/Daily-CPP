@@ -10,6 +10,16 @@ void line(int l = 100)
     }
     cout << endl;
 }
+void lines(int l = 100)
+{
+    ofstream stu("student.txt", ios::app);
+    stu << endl;
+    for (int i = 0; i < l; i++)
+    {
+        stu << "=";
+    }
+    stu << endl;
+}
 
 void cls()
 {
@@ -27,16 +37,24 @@ void center(int c = 45)
         cout << " ";
     }
 }
-
-int main()
+void centers(int c = 45)
 {
-    string name;
-    char c = 'y';
-    int age;
-
     ofstream stu("student.txt", ios::app);
+    for (int i = 0; i < c; i++)
+    {
+        stu << " ";
+    }
+}
 
-    while (c == 'y')
+class record
+{
+private:
+    string name;
+    int age;
+    char c = 'y';
+
+public:
+    void esd()
     {
         cls();
         line();
@@ -48,6 +66,20 @@ int main()
         getline(cin, name);
         cout << "Enter student age: ";
         cin >> age;
+    }
+
+    void pt()
+    {
+        ofstream stu("student.txt", ios::app);
+        lines();
+        centers(40);
+        stu<<"|| Student Information ||";
+        lines();
+    }
+
+    void sd()
+    {
+        ofstream stu("student.txt", ios::app);
         cls();
         line();
         center(40);
@@ -57,6 +89,11 @@ int main()
         cin >> c;
         if (c == 'y' || c == 'Y')
             stu << name << "\t" << age << endl;
+        stu.close();
+    }
+
+    int ad(char c)
+    {
         cls();
         line();
         center(45);
@@ -64,7 +101,19 @@ int main()
         line();
         cout << "Do you want add another student(Y/N): ";
         cin >> c;
+        return c;
     }
-    stu.close();
+};
+
+int main()
+{
+    record r;
+    char c = 'y';
+    while (c == 'y')
+    {
+        r.esd();
+        r.sd();
+        c = r.ad(c);
+    }
     return 0;
 }
