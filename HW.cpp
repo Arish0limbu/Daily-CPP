@@ -50,7 +50,7 @@ public:
         cout << "1) ADD STUDENT." << endl
              << "2) DISPLAY ALL STUDENT INFO." << endl
              << "3) EXIT." << endl;
-             line();
+        line();
         cout << "Enter number to select given option: ";
         cin >> o;
         return o;
@@ -205,18 +205,18 @@ public:
         if (c == 'y' || c == 'Y')
         {
             line();
-        center(35);
-        cout << "|| Record Saved In File ||" << endl;
-        line();
-        system("pause");
+            center(35);
+            cout << "|| Record Saved In File ||" << endl;
+            line();
+            system("pause");
         }
         else
         {
             line();
-        center(32);
-        cout << "|| Record Didn't Saved In File ||" << endl;
-        line();
-        system("pause");
+            center(32);
+            cout << "|| Record Didn't Saved In File ||" << endl;
+            line();
+            system("pause");
         }
     }
 
@@ -231,6 +231,33 @@ public:
         cout << "Do you want add more student(Y/N): ";
         cin >> c;
         return c;
+    }
+
+    void ds()
+    {
+        cls();
+        ifstream stu("student.txt");
+
+        if (!stu)
+        {
+            cls();
+            line();
+            center(40);
+            cout << "|| File Not Found ||" << endl;
+            line();
+            system("pause");
+        }
+
+        string data;
+
+        while (getline(stu, data))
+        {
+            cout << data << endl;
+        }
+
+        stu.close();
+        line();
+        system("pause");
     }
 };
 
@@ -248,12 +275,13 @@ int main()
             while (c == 'y' || c == 'Y')
             {
                 r.esd();
+                r.sd();
                 c = r.ms();
             }
             break;
         }
         case 2:
-            r.sd();
+            r.ds();
             break;
         case 3:
             cls();
