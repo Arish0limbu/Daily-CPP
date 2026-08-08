@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <iomanip> //help to fix position
 
 using namespace std;
@@ -32,26 +33,45 @@ void center(int c = 45)
 class record
 {
 private:
-    string name;
-    int age;
-    int sn = 0;
+    int ns, sn = 0;
+    vector<string> age;
+    vector<string> name;
     char c = 'y';
 
 public:
-    void esd()
+    void nos()
     {
         cls();
         line();
-        center(36);
-        cout << "|| Enter Student Details ||" << endl;
-        ;
+        center(40);
+        cout << "|| Number Of Student ||" << endl;
         line();
-        cout << "Enter Student name: ";
-        getline(cin >> ws, name);
-        cout << "Enter student age: ";
-        cin >> age;
     }
-    
+    int esd()
+    {
+        nos();
+        cout << "Enter the number oF student: ";
+        cin >> ns;
+        name.resize(ns);
+        age.resize(ns);
+
+        for (int i = 0; i < ns; i++)
+        {
+            cls();
+            line();
+            center(36);
+            cout << "|| Enter Student Details ||" << endl;
+            line();
+            center(42);
+            cout << "!! Student " << i + 1 << " !!" << endl;
+            cout << "Enter Student name: ";
+            getline(cin >> ws, name[i]);
+            cout << "Enter student age: ";
+            cin >> age[i];
+        }
+        return ns;
+    }
+
     int getLastSN()
     {
         ifstream file("student.txt");
@@ -131,13 +151,17 @@ public:
         }
         sn = getLastSN();
         sn++;
-        stu << "| "
-            << right << setw(2) << sn
-            << "  |"
-            << left << setw(26) << name
-            << "|   "
-            << left << setw(6) << age
-            << "|" << endl;
+        for (int i = 0; i < ns; i++)
+        {
+            stu << "| "
+                << right << setw(2) << sn
+                << "  |"
+                << left << setw(26) << name[i]
+                << "|   "
+                << left << setw(6) << age[i]
+                << "|" << endl;
+            sn++;
+        }
         stu.close();
     }
 
@@ -155,14 +179,14 @@ public:
             pt();
     }
 
-    int ad(char c)
+    int ms(char c)
     {
         cls();
         line();
         center(45);
-        cout << "|| Add Details ||" << endl;
+        cout << "|| More Students ||" << endl;
         line();
-        cout << "Do you want add another student(Y/N): ";
+        cout << "Do you want add more student(Y/N): ";
         cin >> c;
         return c;
     }
@@ -176,7 +200,7 @@ int main()
     {
         r.esd();
         r.sd();
-        c = r.ad(c);
+        c = r.ms(c);
     }
     cls();
     return 0;
