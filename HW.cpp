@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip> //help to fix position
+
 using namespace std;
 void line(int l = 100)
 {
@@ -32,6 +34,7 @@ class record
 private:
     string name;
     int age;
+    int sn = 0;
     char c = 'y';
 
 public:
@@ -44,10 +47,41 @@ public:
         ;
         line();
         cout << "Enter Student name: ";
-        cin.ignore();
-        getline(cin, name);
+        getline(cin >> ws, name);
         cout << "Enter student age: ";
         cin >> age;
+    }
+    
+    int getLastSN()
+    {
+        ifstream file("student.txt");
+
+        string line;
+        int lastSN = 0;
+
+        while (getline(file, line))
+        {
+            // Look for lines containing student data
+            if (line.length() > 2 && line[0] == '|')
+            {
+                try
+                {
+                    int currentSN = stoi(line.substr(1, 3));
+
+                    if (currentSN > lastSN)
+                    {
+                        lastSN = currentSN;
+                    }
+                }
+                catch (...)
+                {
+                    // Ignore header/separator lines
+                }
+            }
+        }
+
+        file.close();
+        return lastSN;
     }
 
     void pt() // Print into file
@@ -73,15 +107,37 @@ public:
             {
                 stu << "=";
             }
-            stu << endl
-                << "\t\tNAME\t\t|\t AGE\t|" << endl;
+            stu << endl;
+
+            stu << left // start from left side
+                << setw(2) << "|"
+                << "S.N"
+                << setw(1) << " "
+                << "|"
+                << setw(11) << " "
+                << "NAME"
+                << setw(11) << " "
+                << "|"
+                << setw(3) << " "
+                << "AGE"
+                << setw(3) << " "
+                << "|" << endl;
+
             for (int i = 0; i < ls; i++)
             {
                 stu << "=";
             }
             stu << endl;
         }
-        stu << name << "\t\t" << "\t|\t  " << age << "\t|" << endl;
+        sn = getLastSN();
+        sn++;
+        stu << "| "
+            << right << setw(2) << sn
+            << "  |"
+            << left << setw(26) << name
+            << "|   "
+            << left << setw(6) << age
+            << "|" << endl;
         stu.close();
     }
 
