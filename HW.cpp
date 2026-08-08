@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <limits>
 #include <iomanip> //help to fix position
 
 using namespace std;
@@ -52,7 +53,14 @@ public:
              << "3) EXIT." << endl;
         line();
         cout << "Enter number to select given option: ";
-        cin >> o;
+
+        if (!(cin >> o))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            return 0;
+        }
+
         return o;
     }
 
