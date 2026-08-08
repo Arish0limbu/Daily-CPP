@@ -39,6 +39,23 @@ private:
     char c = 'y';
 
 public:
+    int mm()
+    {
+        int o;
+        cls();
+        line();
+        center();
+        cout << "|| Main Menu ||" << endl;
+        line();
+        cout << "1) ADD STUDENT." << endl
+             << "2) DISPLAY ALL STUDENT INFO." << endl
+             << "3) EXIT." << endl;
+             line();
+        cout << "Enter number to select given option: ";
+        cin >> o;
+        return o;
+    }
+
     void nos()
     {
         cls();
@@ -81,12 +98,18 @@ public:
 
         while (getline(file, line))
         {
-            // Look for lines containing student data
-            if (line.length() > 2 && line[0] == '|')
+            if (line.length() > 1 && line[0] == '|')
             {
                 try
                 {
-                    int currentSN = stoi(line.substr(1, 3));
+                    size_t first = line.find('|');
+                    size_t second = line.find('|', first + 1);
+
+                    string snText = line.substr(
+                        first + 1,
+                        second - first - 1);
+
+                    int currentSN = stoi(snText);
 
                     if (currentSN > lastSN)
                     {
@@ -95,12 +118,13 @@ public:
                 }
                 catch (...)
                 {
-                    // Ignore header/separator lines
+                    // Ignore header lines
                 }
             }
         }
 
         file.close();
+
         return lastSN;
     }
 
@@ -173,14 +197,32 @@ public:
         cout << "|| Save Details ||" << endl;
         ;
         line();
-        cout << "Do you want to record(Y/N): ";
+        cout << "Do you want to record in file(Y/N): ";
         cin >> c;
         if (c == 'y' || c == 'Y')
             pt();
+
+        if (c == 'y' || c == 'Y')
+        {
+            line();
+        center(35);
+        cout << "|| Record Saved In File ||" << endl;
+        line();
+        system("pause");
+        }
+        else
+        {
+            line();
+        center(32);
+        cout << "|| Record Didn't Saved In File ||" << endl;
+        line();
+        system("pause");
+        }
     }
 
-    int ms(char c)
+    int ms()
     {
+        char c;
         cls();
         line();
         center(45);
@@ -195,12 +237,35 @@ public:
 int main()
 {
     record r;
-    char c = 'y';
-    while (c == 'y' || c == 'Y')
+    while (true)
     {
-        r.esd();
-        r.sd();
-        c = r.ms(c);
+        int sw = r.mm();
+        switch (sw)
+        {
+        case 1:
+        {
+            char c = 'y';
+            while (c == 'y' || c == 'Y')
+            {
+                r.esd();
+                c = r.ms();
+            }
+            break;
+        }
+        case 2:
+            r.sd();
+            break;
+        case 3:
+            cls();
+            return 0;
+        default:
+            cls();
+            line();
+            center(40);
+            cout << "|| Invalid Input ||" << endl;
+            line();
+            system("pause");
+        }
     }
     cls();
     return 0;
