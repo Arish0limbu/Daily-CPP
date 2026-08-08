@@ -81,7 +81,7 @@ public:
             }
             stu << endl;
         }
-        stu << name << "\t" << "\t|\t  " << age << "\t|" << endl;
+        stu << name << "\t\t" << "\t|\t  " << age << "\t|" << endl;
         stu.close();
     }
 
