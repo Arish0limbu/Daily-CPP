@@ -252,8 +252,6 @@ public:
             line();
             center(40);
             cout << "|| File Not Found ||" << endl;
-            line();
-            system("pause");
         }
 
         string data;
@@ -262,11 +260,12 @@ public:
         {
             cout << data << endl;
         }
-
-        stu.close();
         line();
         system("pause");
+        stu.close();
     }
+
+
 };
 
 int main()
@@ -284,6 +283,7 @@ int main()
             {
                 r.esd();
                 r.sd();
+                
                 c = r.ms();
             }
             break;
