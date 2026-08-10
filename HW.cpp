@@ -272,6 +272,11 @@ public:
         center();
         cout << "|| REMOVE STUDENT ||" << endl;
         line();
+
+         ifstream stu("student.txt");
+         ofstream tstu("tstudent.txt");
+
+         
     }
 };
 
