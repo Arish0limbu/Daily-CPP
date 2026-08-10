@@ -268,6 +268,7 @@ public:
 
     void rs()
     {
+        string tname;
         line();
         center();
         cout << "|| REMOVE STUDENT ||" << endl;
@@ -276,6 +277,18 @@ public:
          ifstream stu("student.txt");
          ofstream tstu("tstudent.txt");
 
+         if (!stu)
+         {
+             cls();
+            line();
+            center(40);
+            cout << "|| File Not Found ||" << endl;
+            line();
+            system("pause");
+         }
+
+         cout << "Enter name of student to remove from file: ";
+         getline{cin, tname};
          
     }
 };
