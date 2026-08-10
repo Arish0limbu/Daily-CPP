@@ -58,7 +58,7 @@ public:
         if (!(cin >> o))
         {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return 0;
         }
 
@@ -266,7 +266,13 @@ public:
         stu.close();
     }
 
-
+    void rs()
+    {
+        line();
+        center();
+        cout << "|| REMOVE STUDENT ||" << endl;
+        line();
+    }
 };
 
 int main()
@@ -284,7 +290,7 @@ int main()
             {
                 r.esd();
                 r.sd();
-                
+
                 c = r.ms();
             }
             break;
@@ -296,7 +302,8 @@ int main()
         }
         case 3:
         {
-
+            r.rs();
+            break;
         }
         case 4:
             cls();
