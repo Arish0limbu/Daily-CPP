@@ -50,7 +50,8 @@ public:
         line();
         cout << "1) ADD STUDENT." << endl
              << "2) DISPLAY ALL STUDENT INFO." << endl
-             << "3) EXIT." << endl;
+             << "3) REMOVE STUDENT." << endl
+             << "4) EXIT." << endl;
         line();
         cout << "Enter number to select given option: ";
 
@@ -289,9 +290,15 @@ int main()
             break;
         }
         case 2:
+        {
             r.ds();
             break;
+        }
         case 3:
+        {
+
+        }
+        case 4:
             cls();
             return 0;
         default:
