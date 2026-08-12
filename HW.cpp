@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <conio.h>
 #include <iomanip> //help to fix position
 
 using namespace std;
@@ -30,6 +31,108 @@ void center(int c = 45)
     {
         cout << " ";
     }
+}
+
+string hidePassword()
+{
+    string password;
+    char ch;
+
+    while (true)
+    {
+        ch = _getch();
+
+        if (ch == 13)
+        {
+            break;
+        }
+
+        if (ch == 8)
+        {
+            if (!password.empty())
+            {
+                password.pop_back();
+                cout << "\b \b";
+            }
+        }
+
+        else
+        {
+            password += ch;
+            cout << "*";
+        }
+    }
+
+    cout << endl;
+    return password;
+}
+
+void login()
+{
+    string username, password;
+    int t = 3;
+    while (t != 0)
+    {
+        cls();
+        line();
+
+        center(42);
+        cout << "|| LOGIN PAGE ||" << endl;
+
+        line();
+
+        cout << "Username: ";
+        getline(cin, username);
+
+        cout << "Password: ";
+        password = hidePassword();
+
+        if (username == "admin" && password == "1234")
+        {
+            line();
+            center(39);
+            cout << "|| Login Successfuly ||" << endl;
+            line();
+            t = 0;
+            system("pause");
+        }
+        else if (username != "admin" || password != "1234")
+        {
+            if (username == "admin")
+            {
+                line();
+                center(39);
+                cout << "|| Incorrect Password ||" << endl;
+                center(40);
+                cout << "|" << t - 1 << "| Attempts left.." << endl;
+                line();
+                system("pause");
+            }
+            else
+            {
+                line();
+                center(39);
+                cout << "|| Incorrect Username ||" << endl;
+                center(44);
+                cout << "|" << t - 1 << "| Attempts left.." << endl;
+                line();
+                system("pause");
+            }
+            t--;
+        }
+        else
+        {
+            line();
+            center(39);
+            cout << "|| Incorrect Username & Password ||" << endl;
+            center(44);
+            cout << "|" << t - 1 << "| Attempts left.." << endl;
+            line();
+            system("pause");
+            t--;
+        }
+    }
+
 }
 class record
 {
@@ -288,13 +391,14 @@ public:
          }
 
          cout << "Enter name of student to remove from file: ";
-         getline{cin, tname};
+         
          
     }
 };
 
 int main()
 {
+    login();
     record r;
     while (true)
     {
